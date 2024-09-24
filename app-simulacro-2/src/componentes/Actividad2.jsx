@@ -6,18 +6,22 @@ export const Actividad2 = () => {
   const [nota, setNota] = useState("");
   const [elEstudiante, setElEstudiante] = useState({});
   const cambiarPromedio = () => {
-    for (const propiedad in estudianteModificado) {
-      if (propiedad === "cantNotas") {
-        estudianteModificado[propiedad] += 1;
+    if (nota < 1 || nota > 10) {
+      alert("Ingrese una nota valida\nDebe ser un numero entre 1 y 10");
+    } else {
+      for (const propiedad in estudianteModificado) {
+        if (propiedad === "cantNotas") {
+          estudianteModificado[propiedad] += 1;
+        }
+        if (propiedad === "promedio") {
+          estudianteModificado[propiedad] = (
+            estudianteModificado[propiedad] +
+            nota / estudianteModificado["cantNotas"]
+          ).toFixed(2);
+        }
       }
-      if (propiedad === "promedio") {
-        estudianteModificado[propiedad] = (
-          estudianteModificado[propiedad] +
-          nota / estudianteModificado["cantNotas"]
-        ).toFixed(2);
-      }
+      setElEstudiante(estudianteModificado);
     }
-    setElEstudiante(estudianteModificado);
   };
   return (
     <div id="2" className="tarjeta">
